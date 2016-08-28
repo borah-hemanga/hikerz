@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="?android:attr/activatedBackgroundIndicator"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
+    android:padding="10dp"
+    >
+    <ImageView
+        android:id="@+id/FriendIcon"
+        android:layout_width="@dimen/friendListImageSize"
+        android:layout_height="@dimen/friendListImageSize"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="2dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@+id/FriendIcon"
+        android:layout_marginLeft="15dp"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/FriendName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/FriendLatestChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:textSize="12sp"
+            android:textColor="#AAAAAA"/>
+    </LinearLayout>
+
+</RelativeLayout>

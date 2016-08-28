@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#1f1f1f</color>
     <color name="colorAccent">#004d00</color>
     <color name="navigationBarColor">#2f2f2f</color>
+    <color name="colorFriendsListDivider">#DDDDDD</color>
+    <color name="colorFriendsList">#FBFBFB</color>
 </resources>

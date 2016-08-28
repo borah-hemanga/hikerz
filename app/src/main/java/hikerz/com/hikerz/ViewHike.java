@@ -46,7 +46,7 @@ public class ViewHike extends AppCompatActivity {
     protected View view;
     FriendListAdapter mFriendListAdapter;
     ListView mFriendListView;
-    static final String months[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    static final String months[] = {"AAA", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     ArrayList<FriendListItem> mFriendsList;
     boolean selected = false;
 
@@ -182,7 +182,7 @@ public class ViewHike extends AppCompatActivity {
 
     private void showDate(int year, int month, int day) {
         StringBuilder s = new StringBuilder()
-                .append(months[month]).append(",").append(day).append(", ").append(year);
+                .append(months[month]).append(" ").append(day).append(", ").append(year);
         dateView.setText(s);
     }
 

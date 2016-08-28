@@ -1,12 +1,15 @@
 package hikerz.com.hikerz;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -40,13 +43,36 @@ public class Hikerz extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Toast.makeText(getApplicationContext(), adapter.getItem(position).toString(),
-                        Toast.LENGTH_SHORT).show();
+                findMatches(adapter.getItem(position).toString());
                 hideKeyboard();
+            }
+        });
+
+        actv.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (actv.getRight() - actv.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()) - 25) {
+                        findMatches(actv.getText().toString());
+                        return true;
+                    }
+                }
+                return false;
             }
         });
     }
 
+    public void findMatches(String location)
+    {
+        Intent intent = new Intent(this, MatchView.class);
+        intent.putExtra("LOCATION", location);
+        startActivity(intent);
+    }
     /**
      * The {@link ViewPager} that will host the section contents.
      */

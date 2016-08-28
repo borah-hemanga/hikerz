@@ -26,6 +26,7 @@
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,6 +34,7 @@
         android:paddingTop="140dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
+        android:orientation="vertical"
         >
         <AutoCompleteTextView android:id="@+id/searchField" android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -45,5 +47,12 @@
             android:paddingBottom="10dp"
             android:drawableRight="@drawable/search_icon"
             android:focusableInTouchMode="true" />
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/hikerz_icon"
+            android:paddingTop="290dp"
+            />
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

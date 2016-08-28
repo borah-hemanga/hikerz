@@ -21,20 +21,22 @@
             android:name=".MatchView"
             android:label="@string/title_activity_match_view"
             android:parentActivityName=".Hikerz"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="hikerz.com.hikerz.Hikerz" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity
             android:name=".ViewHike"
             android:label="@string/title_activity_view_hike"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"

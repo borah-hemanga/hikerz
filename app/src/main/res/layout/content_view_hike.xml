@@ -1,16 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:orientation="vertical"
     tools:showIn="@layout/activity_view_hike" tools:context="hikerz.com.hikerz.ViewHike">
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/swipeEditPhotoContainer"
-        ></FrameLayout>
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="3"
+        android:layout_gravity="top"
+        android:orientation="vertical"
+        >
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/swipeEditPhotoContainer"
+            ></FrameLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/likes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  129 people, Advanced Trails"
+                android:textSize="17dp"
+                android:paddingLeft="5dp"
+                android:paddingBottom="8dp"
+                android:drawableLeft="@drawable/heart_icon"
+                android:fontFamily="sans-serif"
+                />
+            <TextView
+                android:id="@+id/timePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aug 28, 2016"
+                android:paddingBottom="12dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:onClick="setDate"
+                />
+
+            <ListView
+                android:id="@+id/FriendsList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:choiceMode="singleChoice"
+                android:background="@color/colorFriendsList"
+                android:divider="@drawable/friendslist_divider"
+                android:dividerHeight="1dp"
+                android:visibility="invisible"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -6,8 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
-import com.example.hborah.CONSTANTS.PrimaryConstants;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

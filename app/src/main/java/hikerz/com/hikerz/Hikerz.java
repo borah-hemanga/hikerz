@@ -7,7 +7,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,7 +14,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Toast;
 
 public class Hikerz extends AppCompatActivity {
     private AutoCompleteTextView actv;
@@ -23,7 +21,7 @@ public class Hikerz extends AppCompatActivity {
 
     String[] COUNTRIES = new String[] {
             "#popular", "#friends", "#yosemite", "#bayarea", "Big Basin", "Big Sur", "#favorites",
-            "#myhikes", "#myfriends"
+            "#myhikes", "#myfriends", "yosemite",
     };
 
     public void hideKeyboard() {
@@ -43,7 +41,15 @@ public class Hikerz extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                findMatches(adapter.getItem(position).toString());
+                String selectedSearchItem = adapter.getItem(position).toString();
+
+                System.out.println(selectedSearchItem + " " + selectedSearchItem.equalsIgnoreCase("yellow stone") + " yes");
+
+                if (selectedSearchItem.equalsIgnoreCase("yosemite")) {
+                    goToView(selectedSearchItem);
+                } else {
+                    goToMap(selectedSearchItem);
+                }
                 hideKeyboard();
             }
         });
@@ -58,7 +64,16 @@ public class Hikerz extends AppCompatActivity {
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (event.getRawX() >= (actv.getRight() - actv.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()) - 25) {
-                        findMatches(actv.getText().toString());
+                        String selectedSearchItem = actv.getText().toString();
+
+                        System.out.println(selectedSearchItem + " " + selectedSearchItem.equalsIgnoreCase("yellow stone"));
+
+                        if (selectedSearchItem.equalsIgnoreCase("yosemite")) {
+                            goToView(selectedSearchItem);
+                        } else {
+                            goToMap(selectedSearchItem);
+                        }
+
                         return true;
                     }
                 }
@@ -67,7 +82,13 @@ public class Hikerz extends AppCompatActivity {
         });
     }
 
-    public void findMatches(String location)
+    public void goToView(String location) {
+        Intent intent = new Intent(this, ViewHike.class);
+        intent.putExtra("LOCATION", location);
+        startActivity(intent);
+    }
+
+    public void goToMap(String location)
     {
         Intent intent = new Intent(this, MatchView.class);
         intent.putExtra("LOCATION", location);

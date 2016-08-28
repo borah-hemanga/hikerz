@@ -7,13 +7,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -100,8 +98,8 @@ public class ViewHike extends AppCompatActivity {
             add(R.drawable.my_img_0);
             add(R.drawable.my_img_1);
             add(R.drawable.my_img_2);
-            add(R.drawable.my_img_5);
             add(R.drawable.my_img_4);
+            add(R.drawable.my_img_5);
         }
         };
     }
@@ -136,6 +134,32 @@ public class ViewHike extends AppCompatActivity {
         };
     }
 
+    private void setMapListener() {
+        mFriendListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                goToMap("san diego");
+                return false;
+            }
+        });
+
+        mFriendListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println("Here!!!");
+                goToMap("san diego");
+                return false;
+            }
+        });
+    }
+
+    public void goToMap(String location)
+    {
+        Intent intent = new Intent(this, MatchView.class);
+        intent.putExtra("LOCATION", location);
+        startActivity(intent);
+    }
+
     private void setPeople() {
         mFriendListAdapter = new FriendListAdapter(getApplicationContext(), R.layout.friends_list_item, getLayoutInflater(), mFriendsList);
         mFriendListView = (ListView) findViewById(R.id.FriendsList);
@@ -156,7 +180,7 @@ public class ViewHike extends AppCompatActivity {
             } else {
                 setPeopleArr_3();
             }
-
+            selected = !selected;
             setPeople();
         }
     };
@@ -207,6 +231,7 @@ public class ViewHike extends AppCompatActivity {
         setPeopleArr_1();
         setPeople();
         setDatePicker();
+        setMapListener();
     }
 
     class FriendListItem {

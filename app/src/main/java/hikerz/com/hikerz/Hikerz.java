@@ -52,7 +52,7 @@ public class Hikerz extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        mTabLayout = (TabLayout) findViewById(R.id.tabs);
+        //mTabLayout = (TabLayout) findViewById(R.id.tabs);
         mTabLayout.setupWithViewPager(mViewPager);
     }
 

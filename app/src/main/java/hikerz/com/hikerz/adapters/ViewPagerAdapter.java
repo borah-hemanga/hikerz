@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.hborah.smiteme.R;
+import hikerz.com.hikerz.R;
 import com.example.hborah.utils.UtilPhotoStore;
 
 import java.util.ArrayList;

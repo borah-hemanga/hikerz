@@ -445,6 +445,10 @@ public class MatchView extends AppCompatActivity implements FragmentInteractionL
         setContentView(R.layout.activity_match_view);
         Intent intent = getIntent();
         mLocation = intent.getStringExtra("LOCATION");
+        if (mLocation.equalsIgnoreCase("#friends"))
+        {
+            mLocation = "Yosemite";
+        }
         mGoogleMap = null;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

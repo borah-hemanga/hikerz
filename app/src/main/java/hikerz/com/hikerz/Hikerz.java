@@ -21,7 +21,7 @@ public class Hikerz extends AppCompatActivity {
 
     String[] COUNTRIES = new String[] {
             "#popular", "#friends", "#yosemite", "#bayarea", "Big Basin", "Big Sur", "#favorites",
-            "#myhikes", "#myfriends", "San Deigo", "San Francisco",
+            "#myhikes", "#myfriends", "San Diego", "San Francisco",
     };
 
     public void hideKeyboard() {
@@ -43,7 +43,7 @@ public class Hikerz extends AppCompatActivity {
                                     int position, long id) {
                 String selectedSearchItem = adapter.getItem(position).toString();
 
-                if (selectedSearchItem.equalsIgnoreCase("San Deigo")) {
+                if (selectedSearchItem.equalsIgnoreCase("San Diego")) {
                     goToView(selectedSearchItem);
                 } else {
                     goToMap(selectedSearchItem);
@@ -65,7 +65,7 @@ public class Hikerz extends AppCompatActivity {
                         String selectedSearchItem = actv.getText().toString();
 
 
-                        if (selectedSearchItem.equalsIgnoreCase("San Deigo")) {
+                        if (selectedSearchItem.equalsIgnoreCase("San Diego")) {
                             goToView(selectedSearchItem);
                         } else {
                             goToMap(selectedSearchItem);

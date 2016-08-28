@@ -227,7 +227,7 @@ public class MatchView extends AppCompatActivity implements FragmentInteractionL
             "{\"Location\":\"Sugar Pine \",\"Latitude\":37.4405372,\"Longitude\":-119.6364523,\"Difficulty\":3},\n" +
             "{\"Location\":\"Soldiers Loop\",\"Latitude\":38.6913409,\"Longitude\":-90.7328924,\"Difficulty\":1},\n" +
             "{\"Location\":\"Moro Rock in Sequoia National Park\",\"Latitude\":36.5486611,\"Longitude\":-118.7665649,\"Difficulty\":3},\n" +
-            "{\"Location\":\"Forests of the Sequoias\",\"Latitude\":37.372485,\"Longitude\":-122.221188,\"Difficulty\":1},\n" +
+            "{\"Location\":\"Big Basin Redwoods State Park\",\"Latitude\":37.372485,\"Longitude\":-122.221188,\"Difficulty\":1},\n" +
             "{\"Location\":\"Mount Whitney\",\"Latitude\":36.5784991,\"Longitude\":-118.29226,\"Difficulty\":2},\n" +
             "{\"Location\":\"Zion National Park\",\"Latitude\":37.2982022,\"Longitude\":-113.0263005,\"Difficulty\":3},\n" +
             "{\"Location\":\"Syncline Loop \",\"Latitude\":30.5333563,\"Longitude\":-98.4034103,\"Difficulty\":2},\n" +
@@ -437,6 +437,7 @@ public class MatchView extends AppCompatActivity implements FragmentInteractionL
     private AutoCompleteTextView actv;
     ArrayAdapter<String> adapter;
     String mLocation;
+    boolean mUseDefault = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -509,7 +510,6 @@ public class MatchView extends AppCompatActivity implements FragmentInteractionL
     }
 
     private void addOptions() {
-
         actv = (AutoCompleteTextView) findViewById(R.id.searchFieldMatches);
         adapter = new ArrayAdapter<String>(this,
                 R.layout.list_view_row, COUNTRIES);
@@ -520,7 +520,8 @@ public class MatchView extends AppCompatActivity implements FragmentInteractionL
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                changeLocation(adapter.getItem(position).toString(), false);
+                mUseDefault = false;
+                refreshMap(adapter.getItem(position).toString());
                 hideKeyboard();
             }
         });
@@ -535,7 +536,8 @@ public class MatchView extends AppCompatActivity implements FragmentInteractionL
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (event.getRawX() >= (actv.getRight() - actv.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()) - 25) {
-                        changeLocation(actv.getText().toString(), false);
+                        mUseDefault = false;
+                        refreshMap(actv.getText().toString());
                         Log.i("Textual", actv.getText().toString());
                         hideKeyboard();
                         return true;
@@ -562,18 +564,28 @@ public class MatchView extends AppCompatActivity implements FragmentInteractionL
         public int getCount() {
             return 1;
         }
-
-
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        boolean addFilter = false;
+        if (mLocation.indexOf('#') >= 0)
+        {
+            addFilter = true;
+            mLocation = mLocation.substring(mLocation.indexOf('#') + 1, mLocation.length());
+        }
+
         JSONArray arr = null;
         mGoogleMap = googleMap;
         final Context context = this;
         try {
             arr = new JSONArray(data);
             for (int i = 0; i < arr.length(); i++) {
+                if (addFilter)
+                {
+                    if (i % 2 == 0)
+                        continue;
+                }
                 JSONObject obj = arr.getJSONObject(i);
                 String location = obj.getString("Location");
                 double latitude = obj.getDouble("Latitude");
@@ -622,7 +634,9 @@ public class MatchView extends AppCompatActivity implements FragmentInteractionL
 
     void refreshMap(String location)
     {
+        mLocation = location;
         mGoogleMap.clear();
+        onMapReady(mGoogleMap);
     }
 
     void changeLocation(String location, boolean useDefault)
@@ -639,7 +653,7 @@ public class MatchView extends AppCompatActivity implements FragmentInteractionL
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (list.size() > 0) {
+        if (list != null && list.size() > 0) {
             Address address = list.get(0);
             lat = address.getLatitude();
             lng = address.getLongitude();
